@@ -1,0 +1,143 @@
+.playerContainer {
+    width:  100%;
+    padding: 1rem 4rem;
+    height: 70vh;
+    background:  var(--purple-500);
+    color: var(--white);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+
+    header{
+        display: flex;
+        align-items: center;
+        gap: 1rem; 
+    }
+
+    strong {
+        font-family: Lexend, sans-serif;
+        font-weight: 400;
+    }
+
+    footer{
+        align-self: stretch;
+
+        &.empty .progress {
+            opacity: 0.5;
+        }
+    }
+}
+
+.currentEpisode{
+    text-align: center;
+    min-width: 60%;
+    max-width: 60%;
+    min-height: 60%;
+    max-height: 60%;
+
+    img{
+        border-radius: 1.5rem;
+        min-width: 60%!important;
+        max-width: 60%!important;
+        min-height: 70%!important;
+        max-height: 60%!important;
+    }
+
+    strong{
+        display: block;
+        margin-top: 0rem;
+        font: 600 1.25rem Lexend, sans-serif;
+        line-height: 1.75rem;
+    }
+
+    span{
+        display: block;
+        margin-top: 1rem;
+        opacity: 0.6;
+        line-height: 1.5rem;
+    }
+}
+
+.emptyPlayer {
+    width: 100%;
+    height: 20rem;
+    border: 1.5px dashed var(--purple-300);
+    border-radius: 1.5rem;
+    background: linear-gradient(143.8deg, rgba(145, 100, 250, 0.8) 0%, rgba(0,0,0,0)100%);
+    padding: 4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    span{
+        display: inline-block;
+        width: 4rem;
+        text-align: center;
+    }
+
+    .slider{
+        flex:  1;
+
+        .emptySlider{
+            width: 100%;
+            height: 4px;
+            background: var(--purple-300);
+            border-radius: 2px;
+        }
+    }
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+    gap: 1.5rem;
+
+    button{
+        background: transparent;
+        border: 0;
+        font-size: 0;
+
+        transition: filter 0.2s;
+
+        &:disabled{
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        &:hover:not(:disabled){
+            filter: brightness(0.7);
+        }
+
+        &.isActive{
+            filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+        }
+
+        &.isActive:hover{
+            filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+        }
+
+        &.playButton {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            background: var(--purple-400);
+
+            &:hover:not(:disabled){
+                filter: brightness(0.95);
+            }
+        }
+    }
+}
+
+
