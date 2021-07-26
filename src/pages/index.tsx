@@ -4,7 +4,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import {Container, Row, Col, Table} from 'react-bootstrap';
+import {Container, Row, Col, Card} from 'react-bootstrap';
 
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 import { api } from '../services/api';
@@ -52,36 +52,35 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
 								return(
 									// eslint-disable-next-line react/jsx-key
 									<Col md="6"> 
-										<li key={episode.id}>
-											<Image 
-											src={episode.thumbnail}
-											alt={episode.title}
-											width={192}
-											height={192}
-											quality={100}
-											objectFit="cover"
-											/>
+										<Card className={styles.card}>
+											<li key={episode.id}>
+												<Card.Img variant="top" src={episode.thumbnail} />
+												<Card.Body className={styles.episodeDetails}>
+													{/* <div className={styles.episodeDetails}> */}
+													<Card.Title></Card.Title>
 
-											<div className={styles.episodeDetails}>
+													<Link href={`/episodes/${episode.id}`}>
+														<a >{episode.title}</a>
+													</Link>
 
-											<Link href={`/episodes/${episode.id}`}>
-												<a >{episode.title}</a>
-											</Link>
+													<Card.Text>
+														<p>{episode.members}</p>
+														<span>{episode.publishedAt}</span>
+														<span>{episode.durationAsString}</span>
+														{/* </div> */}
+													</Card.Text>	
 
-											<p>{episode.members}</p>
-											<span>{episode.publishedAt}</span>
-											<span>{episode.durationAsString}</span>
-											</div>
-
-											<button type="button" onClick={() => playList(episodeList, index)}>
-											<Image 
-												src="/play-green.svg" 
-												alt="Tocar episódio"
-												width={5}
-												height={5}
-											/>
-											</button>
-										</li>  
+													<button type="button" onClick={() => playList(episodeList, index)}>
+													<Image 
+														src="/play-green.svg" 
+														alt="Tocar episódio"
+														width={5}
+														height={5}
+													/>
+													</button>
+												</Card.Body>
+											</li>  
+										</Card>	
 									</Col>                                                       
 								)}                    
 							)} 
@@ -93,46 +92,17 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
 			<section className={styles.allEpisodes}>
 				<Container>
 					<h2>Todos episódios</h2>
-					<Row>         
-						<Table responsive="sm">
-							<thead>
-								<tr>
-									<th></th>
-									<th>Podcast</th>
-									<th>Integrantes</th>
-									<th>Data</th>
-									<th>Duração</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-							{allEpisodes.map((episode, index) => {
-								return(
-									<tr key={episode.id}>
+					<Row> 					
+						{allEpisodes.map((episode, index) => {
+							return(	
+								<Col sm ="6" md="4" lg="4" xl="3" key={episode.id}> 							
+									<Card className={styles.card}>
 
-										<td style={{width: 72}}>
-										<Image 
-											src={episode.thumbnail}
-											alt={episode.title}
-											width={120}
-											height={120}
-											quality={100}
-											objectFit="cover"
-										/>
-										</td>
-
-										<td>
 										<Link href={`/episodes/${episode.id}`}>
-											<a>{episode.title}</a>
+											<a><Card.Img variant="top" src={episode.thumbnail} alt={episode.title} /></a>
 										</Link>
-										</td>
-
-										<td>{episode.members}</td>
-										<td style={{width: 100}}>{episode.publishedAt}</td>
-										<td>{episode.durationAsString}</td>
-
-										<td>
 										<button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
+											{/* <Card.Img variant="top" src="/play-green.svg"  alt="Tocar episódio"/> */}
 											<Image 
 											src="/play-green.svg" 
 											alt="Tocar episódio"
@@ -140,13 +110,21 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
 											height={25}
 											/>
 										</button>
-										</td>
-
-									</tr>
-								)
-							})}
-							</tbody>
-						</Table>
+										
+										<Card.Body >
+											{/* <Card.Title></Card.Title>										
+											
+										 <Card.Text>	
+												<p>{episode.members}</p>
+												<span>{episode.publishedAt}</span><br></br>
+												<span>{episode.durationAsString}</span>
+											</Card.Text> 	 */}							
+											
+										</Card.Body>
+									</Card>  
+								</Col>
+							)
+						})}
 					</Row>
 				</Container>
 			</section>
