@@ -95,7 +95,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
 					<Row> 					
 						{allEpisodes.map((episode, index) => {
 							return(	
-								<Col sm ="6" md="4" lg="4" xl="3" key={episode.id}> 							
+								<Col sm="6" md="4" lg="4" xl="3" key={episode.id}> 							
 									<Card className={styles.card}>
 
 										<Link href={`/episodes/${episode.id}`}>
